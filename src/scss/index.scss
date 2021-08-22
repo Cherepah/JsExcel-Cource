@@ -6,6 +6,7 @@
 @import "formula";
 @import "table";
 @import "button";
+@import "excel";
 
 * {
     margin: 0;
@@ -16,8 +17,4 @@
 body {
     font-family: "Roboto", sans-serif;
     font-size: 12px;
-}
-
-.excel {
-    position: relative;
 }
