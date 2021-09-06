@@ -14,6 +14,7 @@
         height: $row-height;
     }
     &__row-info{
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,7 +27,22 @@
     &__row-data{
         display: flex;
     }
+    &__row-resize {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 4px;
+        background-color: $primary-color;
+        opacity: 0;
+        z-index: 10;
+        &:hover {
+            opacity: 1;
+            cursor: row-resize;
+        }
+    }
     &__column {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -36,6 +52,20 @@
         border: 1px solid $border-color;
         border-top: 0;
         border-left: 0;
+    }
+    &__column-resize {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 4px;
+        background-color: $primary-color;
+        opacity: 0;
+        z-index: 10;
+        &:hover {
+            opacity: 1;
+            cursor: col-resize;
+        }
     }
     &__cell {
         min-width: 40px;
@@ -51,7 +81,7 @@
 
         &_selected{
             border: none;
-            outline: 2px solid #3c74ff;
+            outline: 2px solid $primary-color;
             z-index: 2;
         }
     }
