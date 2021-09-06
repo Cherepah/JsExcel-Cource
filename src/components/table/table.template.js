@@ -3,22 +3,29 @@ const CODES = {
     Z: 90,
 };
 
-function toCell() {
+function toCell(_, col) {
     return `
-        <div class="table__cell" contenteditable></div>
+        <div class="table__cell" contenteditable data-col="${col}"></div>
     `;
 }
 
-function toColumn(col) {
+function toColumn(col, index) {
     return `
-        <div class="table__column">${col}</div>
+        <div class="table__column" data-type="resizable" data-col="${index}">
+            ${col}
+            <div class="table__column-resize" data-resize="col"></div>
+        </div>
     `;
 }
 
 function createRow(index, content) {
+    const resizer = index ? '<div class="table__row-resize" data-resize="row"></div>' : '';
     return `
-            <div class="table__row"> 
-                <div class="table__row-info">${index ? index : ''}</div>
+            <div class="table__row" data-type="resizable"> 
+                <div class="table__row-info">
+                    ${index ? index : ''}
+                    ${resizer}
+                </div>
                 <div class="table__row-data">${content}</div>
             </div>
     `;
@@ -35,9 +42,7 @@ export function createTable(rowsCount = 15) {
     const cols = new Array(colsCount)
         .fill('')
         .map(toChar)
-        .map((el) => {
-            return toColumn(el);
-        })
+        .map(toColumn)
         .join('');
 
     rows.push(createRow(0, cols));
